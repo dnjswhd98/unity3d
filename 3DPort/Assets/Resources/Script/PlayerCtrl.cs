@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField]private float MoveSpeed;
     private bool Falling;
     private bool Jump;
+    private float Fire;
     private Animator Anime;
 
     private Rigidbody Rigid;
@@ -21,6 +22,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         MoveSpeed = 4.0f;
         Falling = false;
+        Fire = 0.0f;
     }
 
     void Update()
@@ -36,26 +38,34 @@ public class PlayerCtrl : MonoBehaviour
             Jump = true;
         }
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            Fire = 1.0f;
+        }
+
         Anime.SetFloat("Hor", Hor);
         Anime.SetFloat("Ver", Ver);
+        Anime.SetFloat("Fire", Fire);
         Anime.SetBool("Jump", Jump);
         Anime.SetBool("Falling", Falling);
+
+        Fire = 0.0f;
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.transform.tag == "GraundObj")
-    //    {
-    //        Falling = true;
-    //        Jump = false;
-    //    }
-    //}
-    //
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.transform.tag == "GraundObj")
-    //    {
-    //        Falling = false;
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "GraundObj")
+        {
+            Falling = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "GraundObj")
+        {
+            Falling = true;
+            Jump = false;
+        }
+    }
 }

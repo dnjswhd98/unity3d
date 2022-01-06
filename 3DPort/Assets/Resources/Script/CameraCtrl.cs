@@ -26,6 +26,7 @@ public class CameraCtrl : MonoBehaviour
         Vector3 camAngle = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(camAngle.x - mouseDelta.y * 3.0f, camAngle.y + mouseDelta.x * 3.0f, camAngle.z);
 
-        Player.transform.rotation.SetEulerAngles(0.0f, transform.rotation.y, 0.0f);
+        if(Input.anyKey)
+            Player.transform.rotation = Quaternion.Euler(0.0f, camAngle.y + mouseDelta.x * 3.0f, 0.0f);
     }
 }
