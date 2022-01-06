@@ -42,20 +42,20 @@ public class PlayerCtrl : MonoBehaviour
         Anime.SetBool("Falling", Falling);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.transform.tag == "GraundObj")
-        {
-            Falling = true;
-            Jump = false;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.transform.tag == "GraundObj")
-        {
-            Falling = false;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.transform.tag == "GraundObj")
+    //    {
+    //        Falling = true;
+    //        Jump = false;
+    //    }
+    //}
+    //
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.transform.tag == "GraundObj")
+    //    {
+    //        Falling = false;
+    //    }
+    //}
 }
