@@ -53,13 +53,13 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Script\EnemyRay.cs" />
     <Compile Include="Assets\Resources\Script\SpawnEnemy.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\EnemySpawn.cs" />
+    <Compile Include="Assets\Resources\Script\RobEnemyCtal.cs" />
     <Compile Include="Assets\Resources\Script\PlayerCtrl.cs" />
     <Compile Include="Assets\Resources\Script\CameraCtrl.cs" />
     <Compile Include="Assets\Resources\Script\GameManager.cs" />
-    <Compile Include="Assets\Resources\Script\RobEnemyCtal.cs" />
-    <Compile Include="Assets\Resources\Script\EnemyRay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
