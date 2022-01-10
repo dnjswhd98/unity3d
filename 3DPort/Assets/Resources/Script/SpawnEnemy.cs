@@ -8,7 +8,7 @@ public class SpawnEnemy : MonoBehaviour
 
     private void Awake()
     {
-        Enemy = Resources.Load("Delivery Robot/Prefabs/Standard/Robot_Blue Variant") as GameObject;
+        Enemy = Resources.Load("Prefab/RobEnemy") as GameObject;
     }
 
     void Start()
@@ -26,8 +26,10 @@ public class SpawnEnemy : MonoBehaviour
         if (collision.transform.tag == "GraundObj")
         {
             Enemy.transform.position = transform.position;
+            Enemy.AddComponent<EnemyRay>();
             Instantiate(Enemy);
-            Destroy(this);
+            this.gameObject.SetActive(false);
+            //Destroy(this);
         }
     }
 }

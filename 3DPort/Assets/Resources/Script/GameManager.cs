@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     {
         Player = Resources.Load("Prefab/Player") as GameObject;
         EnemySpawnPercentage = 0.25f;
+        EnemySpawnPoint = new GameObject("ESpawnPoint");
     }
 
     void Start()
@@ -29,10 +30,10 @@ public class GameManager : MonoBehaviour
             EnemySpawnPoint.AddComponent<SpawnEnemy>();
 
             EnemySpawnPoint.transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
-            Instantiate(EnemySpawnPoint = new GameObject("ESpawnPoint"));
+            Instantiate(EnemySpawnPoint);
         }
 
-        if(EnemySpawnPoint.transform.position.y < 10)
+        if(EnemySpawnPoint.transform.position.y < 50)
         {
             EnemySpawnPoint.transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
         }
