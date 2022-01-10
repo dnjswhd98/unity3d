@@ -53,9 +53,11 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Script\EnemyMovement\EnemySpawn.cs" />
     <Compile Include="Assets\Resources\Script\PlayerCtrl.cs" />
     <Compile Include="Assets\Resources\Script\CameraCtrl.cs" />
     <Compile Include="Assets\Resources\Script\GameManager.cs" />
+    <Compile Include="Assets\Resources\Script\SpawnEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

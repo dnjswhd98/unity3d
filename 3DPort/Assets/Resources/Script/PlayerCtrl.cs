@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayerCtrl : MonoBehaviour
 {
     [SerializeField]private float MoveSpeed;
+    private float Fire;
     private bool Falling;
     private bool Jump;
-    private float Fire;
+
+    private Vector3 LastPosition;
+
     private Animator Anime;
 
     private Rigidbody Rigid;
@@ -32,6 +35,11 @@ public class PlayerCtrl : MonoBehaviour
 
         transform.Translate(Time.deltaTime * MoveSpeed * Hor, 0.0f, Time.deltaTime * MoveSpeed * Ver, Space.Self);
 
+        if(!Falling)
+        {
+            LastPosition = transform.position;
+        }
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Rigid.AddForce(Vector3.up * 500.0f);
@@ -41,6 +49,13 @@ public class PlayerCtrl : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Fire = 1.0f;
+        }
+
+        if(transform.position.y < 50)
+        {
+            //transform.position = GameObject.Find("PlayerSpawn").transform.position;
+
+            transform.position = LastPosition;
         }
 
         Anime.SetFloat("Hor", Hor);

@@ -10,12 +10,16 @@ public class CameraCtrl : MonoBehaviour
     private void Awake()
     {
         MainCamera = transform.Find("Main Camera").GetComponent<Camera>();
-        Player = GameObject.FindWithTag("Player");
+
     }
 
     void Start()
     {
-        
+    }
+
+    private void FixedUpdate()
+    {
+        Player = GameObject.FindWithTag("Player");
     }
 
     void Update()
