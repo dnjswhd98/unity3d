@@ -60,6 +60,8 @@
     <Compile Include="Assets\Resources\Script\PlayerCtrl.cs" />
     <Compile Include="Assets\Resources\Script\CameraCtrl.cs" />
     <Compile Include="Assets\Resources\Script\GameManager.cs" />
+    <Compile Include="Assets\Resources\Script\Singleton.cs" />
+    <Compile Include="Assets\Resources\Script\BulletCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

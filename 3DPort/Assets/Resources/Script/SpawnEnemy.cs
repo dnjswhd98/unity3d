@@ -11,14 +11,17 @@ public class SpawnEnemy : MonoBehaviour
         Enemy = Resources.Load("Prefab/RobEnemy") as GameObject;
     }
 
-    void Start()
+    private void OnEnable()
     {
-        
+        transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
     }
 
-    void Update()
+    private void Update()
     {
-        
+        if (transform.position.y < 50)
+        {
+            transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,10 +29,8 @@ public class SpawnEnemy : MonoBehaviour
         if (collision.transform.tag == "GraundObj")
         {
             Enemy.transform.position = transform.position;
-            Enemy.AddComponent<EnemyRay>();
             Instantiate(Enemy);
-            this.gameObject.SetActive(false);
-            //Destroy(this);
+            gameObject.SetActive(false);
         }
     }
 }

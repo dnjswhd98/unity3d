@@ -6,6 +6,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     [SerializeField]private float MoveSpeed;
     private float Fire;
+    private float FireSpeed;
     private bool Falling;
     private bool Jump;
 
@@ -15,10 +16,14 @@ public class PlayerCtrl : MonoBehaviour
 
     private Rigidbody Rigid;
 
+    private GameObject Bullet;
+
     private void Awake()
     {
         Rigid = GetComponent<Rigidbody>();
         Anime = GetComponent<Animator>();
+        Bullet = Resources.Load("Prefab/Bullet") as GameObject;
+        
     }
 
     void Start()
@@ -26,6 +31,7 @@ public class PlayerCtrl : MonoBehaviour
         MoveSpeed = 4.0f;
         Falling = false;
         Fire = 0.0f;
+        FireSpeed = 1.0f;
     }
 
     void Update()
@@ -46,9 +52,15 @@ public class PlayerCtrl : MonoBehaviour
             Jump = true;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             Fire = 1.0f;
+            StartCoroutine("ShootBullet");
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            Fire = 0.0f;
+            StopCoroutine("ShootBullet");
         }
 
         if(transform.position.y < 50)
@@ -64,7 +76,6 @@ public class PlayerCtrl : MonoBehaviour
         Anime.SetBool("Jump", Jump);
         Anime.SetBool("Falling", Falling);
 
-        Fire = 0.0f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,5 +93,13 @@ public class PlayerCtrl : MonoBehaviour
             Falling = true;
             Jump = false;
         }
+    }
+
+    IEnumerator ShootBullet()
+    {
+        yield return new WaitForSeconds(FireSpeed);
+
+        Bullet.transform.position = transform.position;
+        Instantiate(Bullet);
     }
 }

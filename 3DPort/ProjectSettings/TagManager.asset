@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GraundObj
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,12 +13,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Bullet
   - Player
   - 
   - GraundObj
-  - 
-  - 
+  - EnemyBullet
+  - Enemy
   - 
   - 
   - 

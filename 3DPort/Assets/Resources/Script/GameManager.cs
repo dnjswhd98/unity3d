@@ -5,14 +5,25 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private GameObject Player;
-    private GameObject EnemySpawnPoint;
+    private GameObject EnemySpawnParent;
+    private GameObject[] EnemySpawnPoint = new GameObject[5];
     [SerializeField] private float EnemySpawnPercentage;
 
     private void Awake()
     {
         Player = Resources.Load("Prefab/Player") as GameObject;
         EnemySpawnPercentage = 0.25f;
-        EnemySpawnPoint = new GameObject("ESpawnPoint");
+        EnemySpawnParent = new GameObject("ESpawnParent");
+
+        for (int i = 0; i < 5; ++i)
+        {
+            EnemySpawnPoint[i] = new GameObject("ESpawnPoint" + i);
+            EnemySpawnPoint[i].transform.parent = EnemySpawnParent.transform;
+            EnemySpawnPoint[i].AddComponent<BoxCollider>();
+            EnemySpawnPoint[i].AddComponent<Rigidbody>();
+            EnemySpawnPoint[i].AddComponent<SpawnEnemy>();
+            EnemySpawnPoint[i].SetActive(false);
+        }
     }
 
     void Start()
@@ -23,19 +34,15 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Random.Range(0.0f, 100.0f) < EnemySpawnPercentage)
+        for (int i = 0; i < 5; ++i)
         {
-            EnemySpawnPoint.AddComponent<BoxCollider>();
-            EnemySpawnPoint.AddComponent<Rigidbody>();
-            EnemySpawnPoint.AddComponent<SpawnEnemy>();
-
-            EnemySpawnPoint.transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
-            Instantiate(EnemySpawnPoint);
-        }
-
-        if(EnemySpawnPoint.transform.position.y < 50)
-        {
-            EnemySpawnPoint.transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
+            if (Random.Range(0.0f, 100.0f) < EnemySpawnPercentage)
+            {
+                if (!EnemySpawnPoint[i].activeSelf)
+                {
+                    EnemySpawnPoint[i].SetActive(true);
+                }
+            }
         }
     }
 }

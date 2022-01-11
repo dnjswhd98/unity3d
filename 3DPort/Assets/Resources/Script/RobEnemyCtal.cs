@@ -8,7 +8,7 @@ public class RobEnemyCtal : MonoBehaviour
 
     private float MoveSpeed;
 
-    private bool FindTarget;
+   [SerializeField] private bool FindTarget;
     private bool Melee;
     private bool Move;
 
@@ -33,9 +33,10 @@ public class RobEnemyCtal : MonoBehaviour
             if (!Move)
                 Move = true;
 
-            Vector3 EnemyAngle = new Vector3(transform.position.x - Player.transform.position.x,
-                transform.position.y - Player.transform.position.y, transform.rotation.z).normalized;
-            transform.LookAt(EnemyAngle);
+            //Vector3 EnemyAngle = new Vector3(transform.position.x - Player.transform.position.x,
+            //    transform.position.y - Player.transform.position.y, transform.rotation.z).normalized;
+            transform.rotation = Quaternion.Euler(transform.position.x - Player.transform.position.x,
+                transform.position.y, transform.rotation.z - Player.transform.position.z);
         }
     }
 }
