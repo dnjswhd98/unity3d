@@ -9,6 +9,7 @@ public class PlayerCtrl : MonoBehaviour
     private float FireSpeed;
     private bool Falling;
     private bool Jump;
+    private bool Dash;
 
     private Vector3 LastPosition;
 
@@ -52,6 +53,11 @@ public class PlayerCtrl : MonoBehaviour
             Jump = true;
         }
 
+        if(Input.GetKey(KeyCode.LeftControl))
+        {
+            Dash = true;
+        }
+
         if (Input.GetMouseButton(0))
         {
             Fire = 1.0f;
@@ -63,7 +69,17 @@ public class PlayerCtrl : MonoBehaviour
             StopCoroutine("ShootBullet");
         }
 
-        if(transform.position.y < 50)
+        if (Dash)
+        {
+            MoveSpeed = 4.0f * 2.0f;
+            if (Hor == 0 && Ver == 0)
+                Dash = false;
+        }
+        else
+            MoveSpeed = 4.0f;
+
+
+        if (transform.position.y < 50)
         {
             //transform.position = GameObject.Find("PlayerSpawn").transform.position;
 
@@ -97,7 +113,7 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator ShootBullet()
     {
-        yield return new WaitForSeconds(FireSpeed);
+        yield return new WaitForSeconds(Time.deltaTime + FireSpeed);
 
         Bullet.transform.position = transform.position;
         Instantiate(Bullet);
