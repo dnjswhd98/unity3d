@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton : MonoBehaviour
+public class Singleton
 {
     private static Singleton Instance = null;
-    public static Singleton GetInstance
+    public static Singleton GetInstance()
     {
-        get
-        {
-            if (Instance == null)
-                Instance = new Singleton();
-
-            return Instance;
-        }
+        if (Instance == null)
+            Instance = new Singleton();
+        return Instance;
     }
 
     private List<GameObject> EnableList = new List<GameObject>();

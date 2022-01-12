@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private GameObject Player;
     private GameObject EnemySpawnParent;
+    private GameObject BulletParent;
     private GameObject[] EnemySpawnPoint = new GameObject[5];
     [SerializeField] private float EnemySpawnPercentage;
 
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
         Player = Resources.Load("Prefab/Player") as GameObject;
         EnemySpawnPercentage = 0.25f;
         EnemySpawnParent = new GameObject("ESpawnParent");
+        BulletParent = new GameObject("BulletParent");
 
         for (int i = 0; i < 5; ++i)
         {

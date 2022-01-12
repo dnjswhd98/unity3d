@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    private int Hp;
+    private int Lv;
+    private int Exp;
+    private int Count;
+
     [SerializeField]private float MoveSpeed;
     private float Fire;
     private float FireSpeed;
@@ -23,16 +28,16 @@ public class PlayerCtrl : MonoBehaviour
     {
         Rigid = GetComponent<Rigidbody>();
         Anime = GetComponent<Animator>();
-        Bullet = Resources.Load("Prefab/Bullet") as GameObject;
         
     }
 
     void Start()
     {
+        Bullet = Resources.Load("Prefab/Bullet") as GameObject;
         MoveSpeed = 4.0f;
         Falling = false;
         Fire = 0.0f;
-        FireSpeed = 1.0f;
+        FireSpeed = 0.1f;
     }
 
     void Update()
@@ -58,15 +63,33 @@ public class PlayerCtrl : MonoBehaviour
             Dash = true;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0) && Fire == 0.0f)
         {
             Fire = 1.0f;
+
+            if (Singleton.GetInstance().GetDisableList.Count == 0)
+            {
+                Singleton.GetInstance().GetDisableList.Push(gameObject);
+                for (int i = 0; i < 10; ++i)
+                {
+                    GameObject Obj = Instantiate(Bullet);
+                    Obj.transform.parent = GameObject.Find("BulletParent").transform;
+                    Obj.SetActive(false);
+                    Singleton.GetInstance().GetDisableList.Push(Obj);
+                }
+            }
+
+            GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
+
+            BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
+            BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+
+            BObj.SetActive(true);
+
+            Singleton.GetInstance().GetEnableList.Add(BObj);
+
             StartCoroutine("ShootBullet");
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Fire = 0.0f;
-            StopCoroutine("ShootBullet");
+            
         }
 
         if (Dash)
@@ -113,9 +136,38 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator ShootBullet()
     {
-        yield return new WaitForSeconds(Time.deltaTime + FireSpeed);
+        yield return new WaitForSeconds(FireSpeed);
 
-        Bullet.transform.position = transform.position;
-        Instantiate(Bullet);
+        if (Singleton.GetInstance().GetDisableList.Count == 0)
+        {
+            Singleton.GetInstance().GetDisableList.Push(gameObject);
+            for (int i = 0; i < 10; ++i)
+            {
+                GameObject Obj = Instantiate(Bullet);
+                Obj.transform.parent = GameObject.Find("BulletParent").transform;
+                Obj.SetActive(false);
+                Singleton.GetInstance().GetDisableList.Push(Obj);
+            }
+        }
+
+        GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
+
+        BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
+        BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+
+        BObj.SetActive(true);
+
+        Singleton.GetInstance().GetEnableList.Add(BObj);
+
+        StartCoroutine("FireDelay");
     }
+
+    IEnumerator FireDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        Fire = 0.0f;
+
+    }
+
 }

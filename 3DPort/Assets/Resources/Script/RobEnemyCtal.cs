@@ -11,6 +11,10 @@ public class RobEnemyCtal : MonoBehaviour
    [SerializeField] private bool FindTarget;
     private bool Melee;
     private bool Move;
+    private bool Dead;
+    public int Hp;
+
+    private Animator Anime;
 
     void Start()
     {
@@ -18,6 +22,10 @@ public class RobEnemyCtal : MonoBehaviour
         FindTarget = false;
         Melee = false;
         Move = false;
+        Dead = false;
+        Hp = 80;
+
+        Anime = GetComponent<Animator>();
     }
 
     void Update()
@@ -33,10 +41,24 @@ public class RobEnemyCtal : MonoBehaviour
             if (!Move)
                 Move = true;
 
-            //Vector3 EnemyAngle = new Vector3(transform.position.x - Player.transform.position.x,
-            //    transform.position.y - Player.transform.position.y, transform.rotation.z).normalized;
             transform.rotation = Quaternion.Euler(transform.position.x - Player.transform.position.x,
                 transform.position.y, transform.rotation.z - Player.transform.position.z);
         }
+
+        if(Move)
+        {
+            transform.Translate(Vector3.forward * MoveSpeed);
+        }
+
+        if(Dead)
+        {
+            GetComponent<EnemyRay>().enabled = false;
+            FindTarget = false;
+            Melee = false;
+            Move = false;
+            Dead = false;
+        }
+
+        Anime.SetBool("Dead", Dead);
     }
 }

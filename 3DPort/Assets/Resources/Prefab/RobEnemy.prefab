@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 992421225}
   m_Layer: 8
   m_Name: HitBox
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   FindTarget: 0
+  Hp: 0
 --- !u!135 &674732393
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -13,20 +13,37 @@ public class BulletCtrl : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.forward * 2000.0f);
+        GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
     }
 
     void Update()
     {
-        //GetComponent<Rigidbody>().AddForce(Vector3.forward * 2000.0f);
+        if(transform.position.x > 3000 || transform.position.x < -1000 ||
+            transform.position.y > 1000 || transform.position.y < -100 ||
+            transform.position.z > 3000 || transform.position.z < -1000)
+        {
+            DisaBullet();
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.tag == "Enemy")
+        if(other.transform.tag == "GraundObj")
         {
-            transform.gameObject.SetActive(false);
-
+            DisaBullet();
         }
+
+        if (other.transform.tag == "Enemy")
+        {
+            DisaBullet();
+            other.gameObject.GetComponent<RobEnemyCtal>().Hp -= 10;
+        }
+    }
+
+    private void DisaBullet()
+    {
+        Singleton.GetInstance().GetEnableList.Remove(gameObject);
+        gameObject.SetActive(false);
+        Singleton.GetInstance().GetDisableList.Push(gameObject);
     }
 }
