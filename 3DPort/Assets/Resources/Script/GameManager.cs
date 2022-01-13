@@ -8,13 +8,17 @@ public class GameManager : MonoBehaviour
     private GameObject EnemySpawnParent;
     private GameObject BulletParent;
     private GameObject[] EnemySpawnPoint = new GameObject[5];
+    private GameObject[] FlyingEnemySpawnPoint = new GameObject[5];
     [SerializeField] private float EnemySpawnPercentage;
+    private float EnemyFlying;
 
     private void Awake()
     {
         Player = Resources.Load("Prefab/Player") as GameObject;
         EnemySpawnPercentage = 0.25f;
+        EnemyFlying = 1.0f;
         EnemySpawnParent = new GameObject("ESpawnParent");
+        EnemySpawnParent.transform.parent = GameObject.Find("Spawns").transform;
         BulletParent = new GameObject("BulletParent");
 
         for (int i = 0; i < 5; ++i)
@@ -25,6 +29,11 @@ public class GameManager : MonoBehaviour
             EnemySpawnPoint[i].AddComponent<Rigidbody>();
             EnemySpawnPoint[i].AddComponent<SpawnEnemy>();
             EnemySpawnPoint[i].SetActive(false);
+
+            FlyingEnemySpawnPoint[i] = new GameObject("FESpawnPoint" + i);
+            FlyingEnemySpawnPoint[i].transform.parent = EnemySpawnParent.transform;
+            FlyingEnemySpawnPoint[i].AddComponent<SpawnEnemy>();
+            FlyingEnemySpawnPoint[i].SetActive(false);
         }
     }
 
@@ -40,11 +49,24 @@ public class GameManager : MonoBehaviour
         {
             if (Random.Range(0.0f, 100.0f) < EnemySpawnPercentage)
             {
-                if (!EnemySpawnPoint[i].activeSelf)
+                if (Random.Range(0.0f, 2.0f) < EnemyFlying)
                 {
-                    EnemySpawnPoint[i].SetActive(true);
+                    if (!FlyingEnemySpawnPoint[i].activeSelf)
+                    {
+                        FlyingEnemySpawnPoint[i].SetActive(true);
+                        EnemySpawnPoint[i].GetComponent<SpawnEnemy>().Fly = true;
+                    }
+                }
+                else
+                {
+                    if (!EnemySpawnPoint[i].activeSelf)
+                    {
+                        EnemySpawnPoint[i].SetActive(true);
+                        EnemySpawnPoint[i].GetComponent<SpawnEnemy>().Fly = false;
+                    }
                 }
             }
         }
+
     }
 }

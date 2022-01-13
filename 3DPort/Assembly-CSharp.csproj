@@ -62,6 +62,14 @@
     <Compile Include="Assets\Resources\Script\CameraCtrl.cs" />
     <Compile Include="Assets\Resources\Script\GameManager.cs" />
     <Compile Include="Assets\Resources\Script\BulletCtrl.cs" />
+    <Compile Include="Assets\Resources\Script\FlyimgEnemyCtrl.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
+    <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
