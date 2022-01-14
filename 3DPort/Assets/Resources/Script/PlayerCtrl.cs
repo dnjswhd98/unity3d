@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool Dash;
 
     private Vector3 LastPosition;
+    public Vector3 TargetPos;
 
     private Animator Anime;
 
@@ -165,7 +166,9 @@ public class PlayerCtrl : MonoBehaviour
         GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
 
         BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
-        BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+
+        BObj.transform.LookAt(TargetPos);
+        //BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
 
         BObj.SetActive(true);
 
