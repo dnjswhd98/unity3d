@@ -12,6 +12,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField]private float MoveSpeed;
     private float Fire;
     private float FireSpeed;
+    private float AtkDelay;
+
     private bool Falling;
     private bool Jump;
     private bool Dash;
@@ -38,6 +40,7 @@ public class PlayerCtrl : MonoBehaviour
         Falling = false;
         Fire = 0.0f;
         FireSpeed = 0.1f;
+        AtkDelay = 0.2f;
     }
 
     void Update()
@@ -52,7 +55,7 @@ public class PlayerCtrl : MonoBehaviour
             LastPosition = transform.position;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && !Jump)
         {
             Rigid.AddForce(Vector3.up * 500.0f);
             Jump = true;
@@ -66,30 +69,24 @@ public class PlayerCtrl : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Fire == 0.0f)
         {
             Fire = 1.0f;
+            AtkDelay = 0.2f;
 
-            if (Singleton.GetInstance().GetDisableList.Count == 0)
-            {
-                Singleton.GetInstance().GetDisableList.Push(gameObject);
-                for (int i = 0; i < 10; ++i)
-                {
-                    GameObject Obj = Instantiate(Bullet);
-                    Obj.transform.parent = GameObject.Find("BulletParent").transform;
-                    Obj.SetActive(false);
-                    Singleton.GetInstance().GetDisableList.Push(Obj);
-                }
-            }
-
-            GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
-
-            BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
-            BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
-
-            BObj.SetActive(true);
-
-            Singleton.GetInstance().GetEnableList.Add(BObj);
+            ShotBullet();
 
             StartCoroutine("ShootBullet");
-            
+        }
+
+        if(Input.GetKeyDown(KeyCode.R) && Fire == 0)
+        {
+            Fire = 3.0f;
+            AtkDelay = 0.6f;
+
+            StartCoroutine("ShootBullet");
+        }
+
+        if(Fire == 3.0f)
+        {
+            ShotBullet();
         }
 
         if (Dash)
@@ -138,6 +135,21 @@ public class PlayerCtrl : MonoBehaviour
     {
         yield return new WaitForSeconds(FireSpeed);
 
+        ShotBullet();
+
+        StartCoroutine("FireDelay");
+    }
+
+    IEnumerator FireDelay()
+    {
+        yield return new WaitForSeconds(AtkDelay);
+
+        Fire = 0.0f;
+
+    }
+
+    private void ShotBullet()
+    {
         if (Singleton.GetInstance().GetDisableList.Count == 0)
         {
             Singleton.GetInstance().GetDisableList.Push(gameObject);
@@ -158,16 +170,5 @@ public class PlayerCtrl : MonoBehaviour
         BObj.SetActive(true);
 
         Singleton.GetInstance().GetEnableList.Add(BObj);
-
-        StartCoroutine("FireDelay");
     }
-
-    IEnumerator FireDelay()
-    {
-        yield return new WaitForSeconds(0.2f);
-
-        Fire = 0.0f;
-
-    }
-
 }

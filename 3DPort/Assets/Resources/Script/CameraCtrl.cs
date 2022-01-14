@@ -32,5 +32,7 @@ public class CameraCtrl : MonoBehaviour
 
         if(Input.anyKey)
             Player.transform.rotation = Quaternion.Euler(0.0f, camAngle.y + mouseDelta.x * 3.0f, 0.0f);
+
+        //if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
     }
 }
