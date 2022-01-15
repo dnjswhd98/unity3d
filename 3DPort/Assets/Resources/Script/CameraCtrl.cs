@@ -28,8 +28,6 @@ public class CameraCtrl : MonoBehaviour
 
     void Update()
     {
-        transform.position = Player.transform.position;
-
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); 
         Vector3 camAngle = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(camAngle.x - mouseDelta.y * 3.0f, camAngle.y + mouseDelta.x * 3.0f, camAngle.z);
@@ -45,5 +43,10 @@ public class CameraCtrl : MonoBehaviour
                 GameObject.FindWithTag("Player").GetComponent<PlayerCtrl>().TargetPos = hit.point;
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        transform.position = Player.transform.position;
     }
 }

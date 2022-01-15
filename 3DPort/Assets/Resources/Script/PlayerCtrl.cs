@@ -167,8 +167,8 @@ public class PlayerCtrl : MonoBehaviour
 
         BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
 
-        BObj.transform.LookAt(TargetPos);
-        //BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+        //BObj.transform.LookAt(TargetPos);
+        BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
 
         BObj.SetActive(true);
 

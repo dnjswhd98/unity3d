@@ -53,28 +53,30 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\EnemyRay.cs" />
     <Compile Include="Assets\Resources\Script\SpawnEnemy.cs" />
+    <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\EnemySpawn.cs" />
+    <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\RobEnemyCtal.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
+    <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Resources\Script\PlayerCtrl.cs" />
     <Compile Include="Assets\Resources\Script\Singleton.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\FlyimgEnemyCtrl.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
+    <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Resources\Script\CameraCtrl.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Resources\Script\GameManager.cs" />
     <Compile Include="Assets\Resources\Script\BulletCtrl.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
-    <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
-    <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
-    <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
-    <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
+    <Compile Include="Assets\Resources\Script\FEnemyMove\FEnemyARay.cs" />
+    <Compile Include="Assets\Resources\Script\PlayerStatUi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
