@@ -14,7 +14,7 @@ public class FlyimgEnemyCtrl : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
-        Muzzle = transform.Find("Muzzle").gameObject;
+        Muzzle = transform.Find("AtkRange/Muzzle").gameObject;
         Fire = false;
     }
 
@@ -29,7 +29,21 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         }
         else
         {
-            StartCoroutine("SReady");
+            //if (!transform.Find("AtkRange/Ray").gameObject.activeSelf)
+            //    transform.Find("AtkRange/Ray").gameObject.SetActive(true);
+            Fire = true;
+        }
+
+        if(Fire)
+        {
+            StartCoroutine("Atk");
+        }
+        else
+        {
+            //StopCoroutine("Atk");
+            Muzzle.SetActive(false);
+            transform.Find("AtkRange").GetComponent<FEnemyARay>().shotL = false;
+
         }
     }
 
@@ -52,16 +66,22 @@ public class FlyimgEnemyCtrl : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         if (other.transform.tag == "Player")
-            Debug.Log("Hit");
+            GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>().PlayerHp -= 10;
     }
 
-    IEnumerator SReady()
+    IEnumerator Atk()
     {
         yield return new WaitForSeconds(1.0f);
 
         if(!Muzzle.activeSelf)
         {
+            transform.Find("AtkRange/Ray").gameObject.SetActive(false);
             Muzzle.SetActive(true);
+           
         }
+
+        transform.Find("AtkRange").GetComponent<FEnemyARay>().shotL = true;
+        Fire = false;
+
     }
 }

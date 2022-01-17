@@ -17,26 +17,43 @@ public class PlayerStatUi : MonoBehaviour
     private Text HpText;
     private Text LvText;
 
-    void Start()
+    private void Awake()
     {
-        PlayerHp = 0;
-        PlayerMaxHp = 0;
-        PlayerExp = 0;
-        PlayerMaxExp = 0;
-        PlayerLv = 0;
-
-        HpBar = transform.Find("Hpbar/Fill Area/Fill").gameObject;
+        HpBar = transform.Find("HpBar/Fill Area/Fill").gameObject;
         ExpBar = transform.Find("ExpBar").gameObject;
 
-        HpText = transform.Find("Hpbar/Hp").GetComponent<Text>();
+        HpText = transform.Find("HpBar/Hp").GetComponent<Text>();
         LvText = transform.Find("PlayerLv").GetComponent<Text>();
+    }
+    void Start()
+    {
+        PlayerMaxHp = 110;
+        PlayerHp = PlayerMaxHp;
+        PlayerMaxExp = 30;
+        PlayerExp = 0;
+        PlayerLv = 1;
     }
 
     void Update()
     {
+        if (PlayerExp >= PlayerMaxExp)
+        {
+            ++PlayerLv;
+            PlayerExp = 0;
+            PlayerMaxExp += 20;
+
+            PlayerMaxHp += 33;
+            PlayerHp = PlayerMaxHp;
+        }
 
 
-        HpText.text = PlayerMaxHp + " / " + PlayerHp;
+        if (PlayerHp <= 0)
+            GameObject.FindWithTag("Player").GetComponent<PlayerCtrl>().Dead = true;
+    }
+
+    private void LateUpdate()
+    {
+        HpText.text = PlayerHp + " / " + PlayerMaxHp;
         LvText.text = "Level : " + PlayerLv;
     }
 }

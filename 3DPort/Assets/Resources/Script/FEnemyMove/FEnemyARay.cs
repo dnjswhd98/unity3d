@@ -7,7 +7,7 @@ public class FEnemyARay : MonoBehaviour
     public bool shotL;
     public bool shotRL;
 
-    private RaycastHit THit;
+    [SerializeField]private RaycastHit THit;
 
     private GameObject RayLine;
     private GameObject Target;
@@ -40,9 +40,13 @@ public class FEnemyARay : MonoBehaviour
             {
                 if(THit.transform.tag == "Player")
                 {
-                    Debug.Log("Hit!");
+                    GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>().PlayerHp -= 12;
                 }
             }
+
+            Debug.DrawLine(transform.position, THit.point, Color.red);
         }
+
+        //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 }

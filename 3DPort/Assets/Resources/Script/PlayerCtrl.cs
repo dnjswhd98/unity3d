@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    private int Hp;
-    private int Lv;
-    private int Exp;
-    private int Count;
-
     [SerializeField]private float MoveSpeed;
     private float Fire;
     private float FireSpeed;
@@ -17,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool Falling;
     private bool Jump;
     private bool Dash;
+    public bool Dead;
 
     private Vector3 LastPosition;
     public Vector3 TargetPos;
@@ -26,6 +22,8 @@ public class PlayerCtrl : MonoBehaviour
     private Rigidbody Rigid;
 
     private GameObject Bullet;
+
+    private PlayerStatUi StatUi;
 
     private void Awake()
     {
@@ -42,6 +40,8 @@ public class PlayerCtrl : MonoBehaviour
         Fire = 0.0f;
         FireSpeed = 0.1f;
         AtkDelay = 0.2f;
+
+        StatUi = GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>();
     }
 
     void Update()
@@ -98,7 +98,6 @@ public class PlayerCtrl : MonoBehaviour
         }
         else
             MoveSpeed = 4.0f;
-
 
         if (transform.position.y < 50)
         {
