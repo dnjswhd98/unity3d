@@ -10,6 +10,7 @@ public class PlayerStatUi : MonoBehaviour
     public int PlayerExp;
     public int PlayerMaxExp;
     public int PlayerLv;
+    public float PlayerPower;
 
     private GameObject HpBar;
     private GameObject ExpBar;
@@ -32,10 +33,12 @@ public class PlayerStatUi : MonoBehaviour
         PlayerMaxExp = 30;
         PlayerExp = 0;
         PlayerLv = 1;
+        PlayerPower = 12.0f;
     }
 
     void Update()
     {
+        
         if (PlayerExp >= PlayerMaxExp)
         {
             ++PlayerLv;
@@ -44,6 +47,8 @@ public class PlayerStatUi : MonoBehaviour
 
             PlayerMaxHp += 33;
             PlayerHp = PlayerMaxHp;
+
+            PlayerPower += 2.4f;
         }
 
 

@@ -9,6 +9,8 @@ public class PlayerCtrl : MonoBehaviour
     private float FireSpeed;
     private float AtkDelay;
 
+    public float SkillPower;
+
     private bool Falling;
     private bool Jump;
     private bool Dash;
@@ -40,6 +42,7 @@ public class PlayerCtrl : MonoBehaviour
         Fire = 0.0f;
         FireSpeed = 0.1f;
         AtkDelay = 0.2f;
+        SkillPower = 0.0f;
 
         StatUi = GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>();
     }
@@ -152,7 +155,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (Singleton.GetInstance().GetDisableList.Count == 0)
         {
-            Singleton.GetInstance().GetDisableList.Push(gameObject);
+            //Singleton.GetInstance().GetDisableList.Push(gameObject);
             for (int i = 0; i < 10; ++i)
             {
                 GameObject Obj = Instantiate(Bullet);
@@ -168,6 +171,9 @@ public class PlayerCtrl : MonoBehaviour
 
         //BObj.transform.LookAt(TargetPos);
         BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+
+        if (Fire == 1.0f || Fire == 3.0f)
+            BObj.GetComponent<BulletCtrl>().Power = StatUi.PlayerPower;
 
         BObj.SetActive(true);
 

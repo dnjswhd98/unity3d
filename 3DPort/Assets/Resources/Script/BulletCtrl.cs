@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletCtrl : MonoBehaviour
 {
     private float Speed;
+    public float Power;
 
     void Start()
     {
@@ -26,17 +27,16 @@ public class BulletCtrl : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.transform.tag == "GraundObj")
+        if (collision.transform.tag == "GraundObj")
         {
             DisaBullet();
         }
 
-        if (other.transform.tag == "Enemy")
+        if (collision.transform.tag == "Enemy")
         {
             DisaBullet();
-            other.gameObject.GetComponent<RobEnemyCtal>().Hp -= 10;
         }
     }
 

@@ -28,4 +28,6 @@ public class Singleton
             return DisableList;
         }
     }
+
+    public int DifficultyLv;
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FEnemyARay : MonoBehaviour
 {
-    public bool shotL;
+    [SerializeField]public bool shotL;
     public bool shotRL;
 
     [SerializeField]private RaycastHit THit;
@@ -30,8 +30,6 @@ public class FEnemyARay : MonoBehaviour
         {
             if (!RayLine.activeSelf)
                 RayLine.SetActive(true);
-
-
         }
 
         if(Physics.Raycast(transform.position, transform.forward, out THit))

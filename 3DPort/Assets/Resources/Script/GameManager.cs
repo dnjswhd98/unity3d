@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float EnemySpawnPercentage;
     private float EnemyFlying;
 
+    public int DifficultyLv;
+
     private void Awake()
     {
         Player = Resources.Load("Prefab/Player") as GameObject;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
         EnemySpawnParent = new GameObject("ESpawnParent");
         EnemySpawnParent.transform.parent = GameObject.Find("Spawns").transform;
         BulletParent = new GameObject("BulletParent");
+        DifficultyLv = 0;
 
         for (int i = 0; i < 5; ++i)
         {
@@ -69,5 +72,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void LateUpdate()
+    {
+        Singleton.GetInstance().DifficultyLv = DifficultyLv;
     }
 }
