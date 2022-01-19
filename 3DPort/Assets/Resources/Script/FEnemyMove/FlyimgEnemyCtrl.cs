@@ -10,10 +10,11 @@ public class FlyimgEnemyCtrl : MonoBehaviour
     [SerializeField]private bool PlayerInRange;
     [SerializeField]private bool Fire;
     [SerializeField]private bool Dead;
+    private bool Explo;
 
     private GameObject Player;
     private GameObject Muzzle;
-
+    private GameObject HpBar;
 
     void Start()
     {
@@ -22,9 +23,15 @@ public class FlyimgEnemyCtrl : MonoBehaviour
 
         Player = GameObject.FindWithTag("Player");
         Muzzle = transform.Find("AtkRange/Muzzle").gameObject;
+        HpBar = Instantiate(Resources.Load("Prefab/EnemyHpBar") as GameObject);
+        HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetMaxHp = Hp;
+        HpBar.transform.parent = GameObject.Find("EnemyHpParent").transform;
+
         Fire = false;
 
         Dead = false;
+
+        Explo = false;
     }
 
     void Update()
@@ -46,11 +53,15 @@ public class FlyimgEnemyCtrl : MonoBehaviour
                 StartCoroutine("AtR");
             }
         }
+
         
     }
 
     private void LateUpdate()
     {
+        HpBar.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x,
+            transform.position.y + 2.0f, transform.position.z));
+
         if (Fire)
         {
             StartCoroutine("Atk");
@@ -65,11 +76,18 @@ public class FlyimgEnemyCtrl : MonoBehaviour
 
         if(Dead)
         {
-            GameObject temp = Resources.Load("JMO Asset/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Small") as GameObject;
+            GameObject temp = Resources.Load("JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Small") as GameObject;
+            temp.transform.localScale = new Vector3(3, 3, 3);
             temp.transform.position = transform.position;
-            Instantiate(temp);
+            if (!Explo)
+            {
+                Instantiate(temp);
+                Explo = true;
+            }
 
             GetComponent<Rigidbody>().useGravity = true;
+
+            HpBar.SetActive(false);
         }
     }
 
@@ -77,7 +95,11 @@ public class FlyimgEnemyCtrl : MonoBehaviour
     {
         if(collision.transform.tag == "Bullet")
         {
-            Hp -= collision.transform.GetComponent<BulletCtrl>().Power;
+            float Damage = collision.transform.GetComponent<BulletCtrl>().Power;
+
+            Hp -= Damage;
+
+            HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().Damaged = Damage;
         }
     }
 
