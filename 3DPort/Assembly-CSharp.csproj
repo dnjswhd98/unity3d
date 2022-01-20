@@ -61,12 +61,12 @@
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\EnemySpawn.cs" />
     <Compile Include="Assets\Resources\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
-    <Compile Include="Assets\Resources\Script\EnemyMovement\RobEnemyCtal.cs" />
     <Compile Include="Assets\Resources\Script\PlayerStatUi.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Resources\LB3D\CrabMonster\LB3DGameManager.cs" />
     <Compile Include="Assets\Resources\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
+    <Compile Include="Assets\Resources\Script\EnemyHpBar.cs" />
     <Compile Include="Assets\Resources\Script\PlayerCtrl.cs" />
     <Compile Include="Assets\Resources\Script\Singleton.cs" />
     <Compile Include="Assets\Resources\LB3D\CrabMonster\Scripts\Rikayon.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Assets\Resources\Script\BulletCtrl.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Resources\Script\EnemyHpBar.cs" />
+    <Compile Include="Assets\Resources\Script\EnemyMovement\MutantMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />

@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 11}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 276, y: 312}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 164
+  controlID: 163
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,12 +142,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 955
+    x: 958
     y: 0
-    width: 531
+    width: 528
     height: 271
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 433, y: 271}
   m_MaxSize: {x: 14003, y: 10021}
   vertical: 0
-  controlID: 133
+  controlID: 132
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -247,7 +247,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 955
+    width: 958
     height: 271
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
@@ -279,7 +279,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -307,8 +307,8 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LoadedToolbars:
-  - {fileID: 27}
-  m_MainToolbar: {fileID: 27}
+  - {fileID: 26}
+  m_MainToolbar: {fileID: 26}
   m_LastLoadedLayoutName: 
 --- !u!114 &13
 MonoBehaviour:
@@ -439,7 +439,7 @@ MonoBehaviour:
     m_CachedPref: 0
     m_ControlHash: 0
     m_PrefName: 
-  m_LastInspectedObjectInstanceID: -59380
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_LockTracker:
@@ -466,9 +466,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 781
+    x: 777
     y: 73
-    width: 712
+    width: 707
     height: 655
   m_ViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
@@ -481,6 +481,7 @@ MonoBehaviour:
     - {fileID: 1107224189990286200, guid: 62f12fab7442c5b40bb95b8331dd9001, type: 2}
     - {fileID: 7421133657810726773, guid: 3d459c59c8d19fa4f934b4bfd9d39fe8, type: 2}
     - {fileID: -639825422195774490, guid: 0024dc56362001c4498cbc493c622ac7, type: 2}
+    - {fileID: -5331150203676366267, guid: 4ace75bc6f1820041af2b682c09dd044, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.6554348
       e01: 0
@@ -610,10 +611,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 0.566935
+      e01: 0
+      e02: 0
+      e03: 104.72948
+      e10: 0
+      e11: 0.566935
+      e12: 0
+      e13: 112.36871
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 0024dc56362001c4498cbc493c622ac7, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 4ace75bc6f1820041af2b682c09dd044, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -2793533936835338849, guid: 0024dc56362001c4498cbc493c622ac7, type: 2}
+  - m_Target: {fileID: -5331150203676366267, guid: 4ace75bc6f1820041af2b682c09dd044, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -623,7 +640,7 @@ MonoBehaviour:
   m_MiniTool: 0
   m_LockTracker:
     m_IsLocked: 0
-  m_CurrentEditor: 0
+  m_CurrentEditor: 1
   m_LayerEditor:
     m_SelectedLayerIndex: 0
 --- !u!114 &19
@@ -673,7 +690,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 749
-    width: 954
+    width: 957
     height: 250
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
@@ -689,22 +706,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Biomechanical_Mutant/Materials
+    - Assets/Resources/Script/EnemyMovement
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Biomechanical_Mutant/Materials
+  - Assets/Resources/Script/EnemyMovement
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\SGA\Documents\GitHub\unity3d\3DPort
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f05c0000
-    m_LastClickedID: 23792
-    m_ExpandedIDs: 00000000ea3f0000ec3f0000ee3f0000f03f0000f23f0000f43f0000f63f0000f83f0000fa3f0000fc3f0000fe3f000000400000024000000440000006400000084000000a4000000c4000003a400000ea5c000000ca9a3b
+    scrollPos: {x: 0, y: 418}
+    m_SelectedIDs: da5f0000
+    m_LastClickedID: 24538
+    m_ExpandedIDs: 00000000ea3f0000ec3f0000ee3f0000f03f0000f23f0000f43f0000f63f0000f83f0000fa3f0000fc3f0000fe3f000000400000024000000440000006400000084000000a4000000c4000001c4000002c4000003c4000008849000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -760,7 +777,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000345000008041000070410000d0420000b0660000bc4a000012bc000028400000
+    m_ExpandedInstanceIDs: c6230000345000008041000070410000d0420000b0660000bc4a000012bc0000284000005e40000094410000a04100009a410000e460000014620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -845,17 +862,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 955
+    x: 958
     y: 749
-    width: 529
+    width: 526
     height: 250
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 11}
-      m_SelectedIDs: 0c3e0000
-      m_LastClickedID: 15884
-      m_ExpandedIDs: 923effff3c49ffffd054ffff025cffff0a63ffff4e6bffff526bffffec75ffff8094ffff8494fffffe94ffff0295ffffc69affff12b5ffff82bdffff52fbffff923d0000c83d0000f83d0000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 52fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -917,7 +934,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 345.34973, y: 211.55045, z: 264.96}
     speed: 2
-    m_Value: {x: 0.00000035762787, y: 0.91049, z: -0.12563792}
+    m_Value: {x: 345.34973, y: 211.55045, z: 264.96}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -970,7 +987,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 1.0552311
     speed: 2
-    m_Value: 1.2209077
+    m_Value: 1.0552311
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1110,31 +1127,6 @@ MonoBehaviour:
     height: 250
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &26
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12059, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEditor.CoreModule:UnityEditor.Experimental.TerrainAPI:PaintTextureTool
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Failed to load
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 320
-    height: 550
-  m_ViewDataDictionary: {fileID: 0}
---- !u!114 &27
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
