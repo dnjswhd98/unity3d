@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     public bool Fly;
+    private bool InList;
 
     private GameObject Player;
     private GameObject Enemy;
@@ -21,7 +22,8 @@ public class SpawnEnemy : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player");
         if(!Fly)
-            transform.position = new Vector3(Random.Range(100.0f, 1000.0f), 200.0f, Random.Range(100.0f, 1000.0f));
+            transform.position = new Vector3(Random.Range(Player.transform.position.x - 100.0f, Player.transform.position.x + 100.0f), 
+                Player.transform.position.y + 100.0f, Random.Range(Player.transform.position.z - 100.0f, Player.transform.position.z + 100.0f));
         else
             transform.position = new Vector3(Random.Range(Player.transform.position.x - 1000.0f, Player.transform.position.x + 1000.0f),
                 Random.Range(Player.transform.position.y + 100.0f, Player.transform.position.y + 300.0f),
@@ -37,9 +39,22 @@ public class SpawnEnemy : MonoBehaviour
 
         if(Fly)
         {
-            FEnemy.transform.position = transform.position;
-            Instantiate(FEnemy);
-            gameObject.SetActive(false);
+            if (Singleton.GetInstance().GetDisableEnemyList.Count == 0)
+            {
+                FEnemy.transform.position = transform.position;
+                Instantiate(FEnemy);
+                Singleton.GetInstance().GetEnableList.Add(FEnemy);
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                FEnemy = Singleton.GetInstance().GetDisableEnemyList.Pop();
+                FEnemy = Resources.Load("Prefab/FlyingEnemy1") as GameObject;
+                FEnemy.transform.position = transform.position;
+                Instantiate(FEnemy);
+                Singleton.GetInstance().GetEnableList.Add(FEnemy);
+                gameObject.SetActive(false);
+            }
         }
     }
 
@@ -49,9 +64,22 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (collision.transform.tag == "GraundObj")
             {
-                Enemy.transform.position = transform.position;
-                Instantiate(Enemy);
-                gameObject.SetActive(false);
+                if (Singleton.GetInstance().GetDisableEnemyList.Count == 0)
+                {
+                    Enemy.transform.position = transform.position;
+                    Instantiate(Enemy);
+                    Singleton.GetInstance().GetEnableList.Add(Enemy);
+                    gameObject.SetActive(false);
+                }
+                else
+                {
+                    Enemy = Singleton.GetInstance().GetDisableEnemyList.Pop();
+                    Enemy = Resources.Load("Prefab/RobEnemy") as GameObject;
+                    Enemy.transform.position = transform.position;
+                    Instantiate(Enemy);
+                    Singleton.GetInstance().GetEnableList.Add(Enemy);
+                    gameObject.SetActive(false);
+                }
             }
         }
     }

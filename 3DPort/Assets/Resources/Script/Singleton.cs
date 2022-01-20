@@ -29,5 +29,14 @@ public class Singleton
         }
     }
 
+    private Stack<GameObject> DisableEnemyList = new Stack<GameObject>();
+    public Stack<GameObject> GetDisableEnemyList
+    {
+        get
+        {
+            return DisableEnemyList;
+        }
+    }
+
     public int DifficultyLv;
 }

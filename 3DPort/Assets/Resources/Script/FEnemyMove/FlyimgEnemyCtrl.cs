@@ -54,7 +54,7 @@ public class FlyimgEnemyCtrl : MonoBehaviour
             }
         }
 
-        
+        HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetHp = Hp;
     }
 
     private void LateUpdate()
@@ -87,6 +87,10 @@ public class FlyimgEnemyCtrl : MonoBehaviour
 
             GetComponent<Rigidbody>().useGravity = true;
 
+            Singleton.GetInstance().GetEnableList.Remove(gameObject);
+            gameObject.SetActive(false);
+            Singleton.GetInstance().GetDisableEnemyList.Push(gameObject);
+
             HpBar.SetActive(false);
         }
     }
@@ -97,9 +101,9 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         {
             float Damage = collision.transform.GetComponent<BulletCtrl>().Power;
 
-            Hp -= Damage;
-
             HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().Damaged = Damage;
+
+            Hp -= Damage;
         }
     }
 
