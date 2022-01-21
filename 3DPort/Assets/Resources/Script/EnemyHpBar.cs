@@ -12,14 +12,11 @@ public class EnemyHpBar : MonoBehaviour
 
     public float TargetHp;
     public float TargetMaxHp;
-    public float Damaged;
-    private float TempHp;
 
     void Start()
     {
         RealHpBar = transform.Find("RealHp").GetComponent<Image>();
         MinusHpBar = transform.Find("MinusHp").GetComponent<Image>();
-        Damaged = 0;
         Per = 100;
     }
 

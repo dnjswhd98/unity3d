@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class PlayerStatUi : MonoBehaviour
 {
-    public int PlayerHp;
-    public int PlayerMaxHp;
+    public float PlayerHp;
+    public float PlayerMaxHp;
+    public float PlayerPower;
+    private float Per;
+    [SerializeField]private float EPer;
     public int PlayerExp;
     public int PlayerMaxExp;
     public int PlayerLv;
-    public float PlayerPower;
 
     private GameObject HpBar;
     private GameObject ExpBar;
@@ -28,7 +30,9 @@ public class PlayerStatUi : MonoBehaviour
     }
     void Start()
     {
-        PlayerMaxHp = 110;
+        Per = 1.0f;
+        EPer = 0.0f;
+        PlayerMaxHp = 110.0f;
         PlayerHp = PlayerMaxHp;
         PlayerMaxExp = 30;
         PlayerExp = 0;
@@ -42,17 +46,17 @@ public class PlayerStatUi : MonoBehaviour
         if (PlayerExp >= PlayerMaxExp)
         {
             ++PlayerLv;
-            PlayerExp = 0;
+            PlayerExp -= PlayerMaxExp;
             PlayerMaxExp += 20;
 
-            PlayerMaxHp += 33;
+            PlayerMaxHp += 33.0f;
             PlayerHp = PlayerMaxHp;
 
             PlayerPower += 2.4f;
         }
 
 
-        if (PlayerHp <= 0)
+        if (PlayerHp <= 0.0f)
             GameObject.FindWithTag("Player").GetComponent<PlayerCtrl>().Dead = true;
     }
 
@@ -60,5 +64,11 @@ public class PlayerStatUi : MonoBehaviour
     {
         HpText.text = PlayerHp + " / " + PlayerMaxHp;
         LvText.text = "Level : " + PlayerLv;
+
+        Per = (PlayerHp / PlayerMaxHp);
+        EPer = (PlayerExp / PlayerMaxExp);
+
+        HpBar.transform.localScale = new Vector3(Per, HpBar.transform.localScale.y, HpBar.transform.localScale.z);
+        ExpBar.transform.localScale = new Vector3(EPer, ExpBar.transform.localScale.y, ExpBar.transform.localScale.z);
     }
 }

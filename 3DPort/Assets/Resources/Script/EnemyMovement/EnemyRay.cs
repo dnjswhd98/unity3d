@@ -37,7 +37,7 @@ public class EnemyRay : MonoBehaviour
 
                 Vector3 TargetDirection = (Target.position - transform.position).normalized;
 
-                if (Vector3.Angle(-(transform.forward), TargetDirection) < Angle / 2)
+                if (Vector3.Angle(transform.forward, TargetDirection) < Angle / 2)
                 {
                     float TargetDistance = Vector3.Distance(transform.position, Target.position);
 

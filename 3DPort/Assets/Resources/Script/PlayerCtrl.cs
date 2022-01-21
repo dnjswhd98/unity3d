@@ -168,9 +168,11 @@ public class PlayerCtrl : MonoBehaviour
         GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
 
         BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
+        //BObj.transform.rotation = transform.Find("Hips/ArmPosition_Right/Muzzle").rotation;
 
         //BObj.transform.LookAt(TargetPos);
         BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+        //BObj.transform.rotation = 
 
         if (Fire == 1.0f || Fire == 3.0f)
             BObj.GetComponent<BulletCtrl>().Power = StatUi.PlayerPower;

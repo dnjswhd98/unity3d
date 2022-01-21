@@ -11,6 +11,7 @@ public class FlyimgEnemyCtrl : MonoBehaviour
     [SerializeField]private bool Fire;
     [SerializeField]private bool Dead;
     private bool Explo;
+    private bool GiveEp;
 
     private GameObject Player;
     private GameObject Muzzle;
@@ -32,6 +33,8 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         Dead = false;
 
         Explo = false;
+
+        GiveEp = false;
     }
 
     void Update()
@@ -76,6 +79,12 @@ public class FlyimgEnemyCtrl : MonoBehaviour
 
         if(Dead)
         {
+            if (!GiveEp)
+            {
+                GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>().PlayerExp += 3;
+                GiveEp = true;
+            }
+
             GameObject temp = Resources.Load("JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Small") as GameObject;
             temp.transform.localScale = new Vector3(3, 3, 3);
             temp.transform.position = transform.position;
@@ -101,7 +110,7 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         {
             float Damage = collision.transform.GetComponent<BulletCtrl>().Power;
 
-            HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().Damaged = Damage;
+            //HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().Damaged = Damage;
 
             Hp -= Damage;
         }
