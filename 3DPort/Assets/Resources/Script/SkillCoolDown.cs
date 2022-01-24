@@ -26,9 +26,10 @@ public class SkillCoolDown : MonoBehaviour
 
     void Update()
     {
+
         if(CoolTime1 > 0.0f)
         {
-            
+            CoolTime1 -= Time.deltaTime;
         }
     }
 }

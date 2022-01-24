@@ -28,6 +28,7 @@ public class MutantMove : MonoBehaviour
         HpBar = Instantiate(Resources.Load("Prefab/EnemyHpBar") as GameObject);
         HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetMaxHp = Hp;
         HpBar.transform.parent = GameObject.Find("EnemyHpParent").transform;
+        HpBar.SetActive(false);
 
         Atk = false;
         Move = false;
@@ -44,6 +45,9 @@ public class MutantMove : MonoBehaviour
         if (!Move)
             Invoke("EnemySpawn", 4.15f);
 
+        if (GetComponent<EnemyRay>().FindTarget)
+            PlayerInRange = true;
+
         if (!Dead)
         {
             if (Move)
@@ -54,6 +58,16 @@ public class MutantMove : MonoBehaviour
                 if (!PlayerInRange)
                 {
                     transform.Translate(0.0f, 0.0f, Time.deltaTime * 1.0f);
+                }
+                else
+                {
+                    if (!GetComponent<EnemyRay>().AttackRange)
+                    {
+                        transform.Translate(0.0f, 0.0f, Time.deltaTime * 3.5f);
+                        Atk = false;
+                    }
+                    else
+                        Atk = true;
                 }
             }
         }
@@ -87,6 +101,7 @@ public class MutantMove : MonoBehaviour
         Anime.SetBool("Move", Move);
         Anime.SetBool("Attack", Atk);
         Anime.SetBool("Dead", Dead);
+        Anime.SetBool("FindPlayer", PlayerInRange);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,6 +111,8 @@ public class MutantMove : MonoBehaviour
             float Damage = collision.transform.GetComponent<BulletCtrl>().Power;
 
             Hp -= Damage;
+
+            HpBar.SetActive(true);
         }
     }
 

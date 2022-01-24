@@ -11,12 +11,15 @@ public class EnemyRay : MonoBehaviour
 
     private float Radius;
     private float Angle;
+    [SerializeField] private float temp;
 
     public bool FindTarget;
+    public bool AttackRange;
 
     void Start()
     {
         FindTarget = false;
+        AttackRange = false;
 
         Radius = 25.0f;
         Angle = 95.0f;
@@ -42,9 +45,25 @@ public class EnemyRay : MonoBehaviour
                     float TargetDistance = Vector3.Distance(transform.position, Target.position);
 
                     if (!Physics.Raycast(transform.position, TargetDirection, TargetDistance, OnstacleMask))
-                        FindTarget = true;
+                    {
+                        temp = TargetDistance;
+
+                        if (Target.tag == "Player")
+                        {
+                            if (TargetDistance <= 25.0f)
+                                FindTarget = true;
+                            else
+                                FindTarget = false;
+
+                            if (TargetDistance <= 2.0f)
+                                AttackRange = true;
+                            else
+                                AttackRange = false;
+                        }
+                    }
                 }
             }
         }
+       
     }
 }

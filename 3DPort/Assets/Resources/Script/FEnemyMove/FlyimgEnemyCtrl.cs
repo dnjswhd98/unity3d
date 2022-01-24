@@ -24,9 +24,11 @@ public class FlyimgEnemyCtrl : MonoBehaviour
 
         Player = GameObject.FindWithTag("Player");
         Muzzle = transform.Find("AtkRange/Muzzle").gameObject;
+
         HpBar = Instantiate(Resources.Load("Prefab/EnemyHpBar") as GameObject);
         HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetMaxHp = Hp;
         HpBar.transform.parent = GameObject.Find("EnemyHpParent").transform;
+        HpBar.SetActive(false);
 
         Fire = false;
 
@@ -110,7 +112,7 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         {
             float Damage = collision.transform.GetComponent<BulletCtrl>().Power;
 
-            //HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().Damaged = Damage;
+            HpBar.SetActive(true);
 
             Hp -= Damage;
         }

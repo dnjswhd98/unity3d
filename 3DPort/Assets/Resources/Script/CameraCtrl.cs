@@ -35,13 +35,20 @@ public class CameraCtrl : MonoBehaviour
         if(Input.anyKey)
             Player.transform.rotation = Quaternion.Euler(0.0f, camAngle.y + mouseDelta.x * 3.0f, 0.0f);
 
-        if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
+        //if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
+        //{
+        //    //if(Physics.Raycast(CRay,out hit))
+        //    if (Physics.Raycast(transform.position, transform.forward, out hit))
+        //    {
+        //        GameObject.FindWithTag("Player").GetComponent<PlayerCtrl>().TargetPos = hit.point;
+        //    }
+        //}
+        if (Physics.Raycast(transform.Find("Main Camera").position, transform.Find("Main Camera").forward, out hit))
         {
-            //if(Physics.Raycast(CRay,out hit))
-            if (Physics.Raycast(transform.position, transform.forward, out hit))
-            {
+            if (hit.transform != null)
                 GameObject.FindWithTag("Player").GetComponent<PlayerCtrl>().TargetPos = hit.point;
-            }
+            else
+                GameObject.FindWithTag("Player").GetComponent<PlayerCtrl>().TargetPos = new Vector3(0, 0, 0);
         }
     }
 

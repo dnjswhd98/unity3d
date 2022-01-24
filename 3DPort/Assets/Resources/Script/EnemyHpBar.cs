@@ -12,12 +12,20 @@ public class EnemyHpBar : MonoBehaviour
 
     public float TargetHp;
     public float TargetMaxHp;
+    public bool hit;
 
     void Start()
     {
         RealHpBar = transform.Find("RealHp").GetComponent<Image>();
         MinusHpBar = transform.Find("MinusHp").GetComponent<Image>();
         Per = 100;
+    }
+
+    private void OnEnable()
+    {
+        Per = (TargetHp / TargetMaxHp) * 100;
+
+        RealHpBar.rectTransform.sizeDelta = new Vector2(Per, RealHpBar.rectTransform.sizeDelta.y);
     }
 
     void Update()
@@ -29,5 +37,21 @@ public class EnemyHpBar : MonoBehaviour
         if (MinusHpBar.rectTransform.sizeDelta.x != RealHpBar.rectTransform.sizeDelta.x)
             MinusHpBar.rectTransform.sizeDelta = 
                 new Vector2(MinusHpBar.rectTransform.sizeDelta.x - 1.0f, MinusHpBar.rectTransform.sizeDelta.y);
+
+        if (MinusHpBar.rectTransform.sizeDelta.x < RealHpBar.rectTransform.sizeDelta.x)
+            new Vector2(RealHpBar.rectTransform.sizeDelta.x, MinusHpBar.rectTransform.sizeDelta.y);
     }
+
+    private void LateUpdate()
+    {
+        if (MinusHpBar.rectTransform.sizeDelta.x == RealHpBar.rectTransform.sizeDelta.x)
+            Invoke("SActive", 0.5f);
+    }
+
+    void SActive() 
+    {
+        if (MinusHpBar.rectTransform.sizeDelta.x == RealHpBar.rectTransform.sizeDelta.x)
+            transform.parent.gameObject.SetActive(false); 
+    }
+
 }

@@ -10,6 +10,7 @@ public class BulletCtrl : MonoBehaviour
     void Start()
     {
         Speed = 8.0f;
+        GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
     }
 
     private void OnEnable()
