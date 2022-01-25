@@ -104,8 +104,6 @@ public class PlayerCtrl : MonoBehaviour
 
         if (transform.position.y < 50)
         {
-            //transform.position = GameObject.Find("PlayerSpawn").transform.position;
-
             transform.position = LastPosition;
         }
 
@@ -168,15 +166,11 @@ public class PlayerCtrl : MonoBehaviour
         GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
 
         BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
-        
-        //BObj.transform.rotation = transform.Find("Hips/ArmPosition_Right/Muzzle").rotation;
 
         if (TargetPos == new Vector3(0, 0, 0))
             BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
         else
             BObj.transform.LookAt(TargetPos);
-        //BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
-        //BObj.transform.rotation = 
 
         if (Fire == 1.0f || Fire == 3.0f)
             BObj.GetComponent<BulletCtrl>().Power = StatUi.PlayerPower;

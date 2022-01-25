@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Resources\Script\FEnemyMove\FEnemyARay.cs" />
     <Compile Include="Assets\Resources\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Resources\Script\SkillCoolDown.cs" />
     <Compile Include="Assets\Resources\Script\EnemyMovement\EnemyRay.cs" />
     <Compile Include="Assets\Resources\Script\SpawnEnemy.cs" />
     <Compile Include="Assets\Resources\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Assets\Resources\Script\BulletCtrl.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Resources\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Resources\Script\SkillCoolDown.cs" />
+    <Compile Include="Assets\Resources\Script\Portal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />

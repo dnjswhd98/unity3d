@@ -9,6 +9,10 @@ public class SkillCoolDown : MonoBehaviour
     public float CoolTime2;
     public float CoolTime3;
 
+    public float maxCool1;
+    public float maxCool2;
+    public float maxCool3;
+
     private Image CoolDown1;
     private Image CoolDown2;
     private Image CoolDown3;
@@ -26,6 +30,8 @@ public class SkillCoolDown : MonoBehaviour
 
     void Update()
     {
+
+        CoolDown1.rectTransform.sizeDelta = new Vector2(CoolDown1.rectTransform.sizeDelta.x, (maxCool1 / CoolTime1) * 100);
 
         if(CoolTime1 > 0.0f)
         {

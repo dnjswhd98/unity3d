@@ -49,6 +49,10 @@ public class FlyimgEnemyCtrl : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation((Player.transform.position - transform.position).normalized),
                 Time.deltaTime * 1.5f);
+
+            if (transform.Find("AtkRange").GetComponent<FEnemyARay>().shotRL)
+                PlayerInRange = true;
+
             if (!PlayerInRange)
             {
                 transform.Translate(0.0f, 0.0f, Time.deltaTime * 1.0f);
@@ -57,6 +61,8 @@ public class FlyimgEnemyCtrl : MonoBehaviour
             {
                 StartCoroutine("AtR");
             }
+
+            
         }
 
         HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetHp = Hp;
@@ -74,9 +80,8 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         else
         {
             StopCoroutine("Atk");
-            transform.Find("AtkRange").GetComponent<FEnemyARay>().shotL = false;
+            //transform.Find("AtkRange").GetComponent<FEnemyARay>().shotL = false;
             Muzzle.SetActive(false);
-
         }
 
         if(Dead)
@@ -118,17 +123,6 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.tag == "Player")
-            PlayerInRange = true;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.tag == "Player")
-            PlayerInRange = false;
-    }
-
     IEnumerator AtR()
     {
         yield return new WaitForSeconds(1.0f);
@@ -138,7 +132,7 @@ public class FlyimgEnemyCtrl : MonoBehaviour
 
     IEnumerator Atk()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         if(!Muzzle.activeSelf)
         {
@@ -147,6 +141,15 @@ public class FlyimgEnemyCtrl : MonoBehaviour
         }
 
         transform.Find("AtkRange").GetComponent<FEnemyARay>().shotL = true;
+        StartCoroutine("AtkEnd");
+    }
+
+    IEnumerator AtkEnd()
+    {
+        yield return new WaitForSeconds(1.0f);
+
         Fire = false;
+        PlayerInRange = false;
+        StopCoroutine("AtR");
     }
 }

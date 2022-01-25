@@ -34,17 +34,28 @@ public class FEnemyARay : MonoBehaviour
 
         if(Physics.Raycast(transform.position, transform.forward, out THit))
         {
-            if(shotL)
+            float TargetDistance = Vector3.Distance(transform.position, THit.transform.position);
+
+            if (TargetDistance <= 20.0f)
+            {
+                shotRL = true;
+            }
+
+            if(shotRL)
+                RayLine.transform.localScale = new Vector3(1, 1, TargetDistance);
+
+            if (shotL)
             {
                 if(THit.transform.tag == "Player")
                 {
-                    GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>().PlayerHp -= 12;
+                    GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>().PlayerHp -= 0.5f;
                 }
+
+                shotRL = false;
+                shotL = false;
             }
 
             Debug.DrawLine(transform.position, THit.point, Color.red);
         }
-
-        //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 }

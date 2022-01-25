@@ -10,6 +10,7 @@ public class PlayerStatUi : MonoBehaviour
     public float PlayerPower;
     private float Per;
     [SerializeField]private float EPer;
+
     public int PlayerExp;
     public int PlayerMaxExp;
     public int PlayerLv;
@@ -62,7 +63,7 @@ public class PlayerStatUi : MonoBehaviour
 
     private void LateUpdate()
     {
-        HpText.text = PlayerHp + " / " + PlayerMaxHp;
+        HpText.text = Mathf.Round(PlayerHp) + " / " + Mathf.Round(PlayerMaxHp);
         LvText.text = "Level : " + PlayerLv;
 
         Per = (PlayerHp / PlayerMaxHp);
