@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool PActive;
+
+    private void Start()
     {
-        
+        PActive = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        if(other.tag == "Player")
+        {
+            GameObject.Find("TextBox").SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.E))
+                PActive = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameObject.Find("TextBox").SetActive(false);
+        }
     }
 }

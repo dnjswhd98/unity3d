@@ -27,6 +27,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private PlayerStatUi StatUi;
 
+    private SkillCoolDown Cool;
+
     private void Awake()
     {
         Rigid = GetComponent<Rigidbody>();
@@ -45,6 +47,7 @@ public class PlayerCtrl : MonoBehaviour
         SkillPower = 0.0f;
 
         StatUi = GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>();
+        Cool = GetComponent<SkillCoolDown>();
     }
 
     void Update()
@@ -80,10 +83,23 @@ public class PlayerCtrl : MonoBehaviour
             StartCoroutine("ShootBullet");
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && Fire == 0)
+        if (Input.GetMouseButtonDown(1) && Fire == 0.0f)
+        {
+            Fire = 1.0f;
+            AtkDelay = 0.2f;
+
+            ShotBullet();
+
+            StartCoroutine("ShootBullet");
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && Fire == 0 && Cool.CoolTime[2] == 0.0f)
         {
             Fire = 3.0f;
             AtkDelay = 0.6f;
+
+            Cool.CoolTime[2] = 9.0f;
+            Cool.CoolAct[2] = true;
 
             StartCoroutine("ShootBullet");
         }
@@ -167,7 +183,7 @@ public class PlayerCtrl : MonoBehaviour
 
         BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
 
-        if (TargetPos == new Vector3(0, 0, 0))
+        if (!GameObject.Find("CameraObj").GetComponent<CameraCtrl>().FindTarget)
             BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
         else
             BObj.transform.LookAt(TargetPos);

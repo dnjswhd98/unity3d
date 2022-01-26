@@ -5,37 +5,39 @@ using UnityEngine.UI;
 
 public class SkillCoolDown : MonoBehaviour
 {
-    public float CoolTime1;
-    public float CoolTime2;
-    public float CoolTime3;
+    public float[] CoolTime;
 
-    public float maxCool1;
-    public float maxCool2;
-    public float maxCool3;
+    public float[] maxCool;
 
-    private Image CoolDown1;
-    private Image CoolDown2;
-    private Image CoolDown3;
+    private Image[] CoolDown = new Image[3];
+
+    public bool[] CoolAct;
 
     void Start()
     {
-        CoolTime1 = 0.0f;
-        CoolTime2 = 0.0f;
-        CoolTime3 = 0.0f;
+        CoolTime = new float[] { 0, 0, 0 };
+        maxCool = new float[] { 0, 0, 0 };
+        CoolAct = new bool[] { false, false, false };
 
-        CoolDown1 = transform.Find("Rb/CoolTime1").GetComponent<Image>();
-        CoolDown2 = transform.Find("Shift/CoolTime2").GetComponent<Image>();
-        CoolDown3 = transform.Find("R/CoolTime3").GetComponent<Image>();
+        CoolDown[0] = transform.Find("Rb/CoolTime1").GetComponent<Image>();
+        CoolDown[1] = transform.Find("Shift/CoolTime2").GetComponent<Image>();
+        CoolDown[2] = transform.Find("R/CoolTime3").GetComponent<Image>();
+
     }
 
     void Update()
     {
-
-        CoolDown1.rectTransform.sizeDelta = new Vector2(CoolDown1.rectTransform.sizeDelta.x, (maxCool1 / CoolTime1) * 100);
-
-        if(CoolTime1 > 0.0f)
+        for (int i = 0; i < 3; ++i)
         {
-            CoolTime1 -= Time.deltaTime;
+            if (CoolAct[i])
+                maxCool[i] = CoolTime[i];
+
+            CoolDown[i].rectTransform.sizeDelta = new Vector2(CoolDown[i].rectTransform.sizeDelta.x, (maxCool[i] / CoolTime[i]) * 100);
+
+            if (CoolTime[i] > 0.0f)
+            {
+                CoolTime[i] -= Time.deltaTime;
+            }
         }
     }
 }
