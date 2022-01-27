@@ -63,11 +63,14 @@ public class PlayerStatUi : MonoBehaviour
 
     private void LateUpdate()
     {
+        float expTmp = PlayerExp;
+        float MaxexpTmp = PlayerMaxExp;
+
         HpText.text = Mathf.Round(PlayerHp) + " / " + Mathf.Round(PlayerMaxHp);
         LvText.text = "Level : " + PlayerLv;
 
         Per = (PlayerHp / PlayerMaxHp);
-        EPer = (PlayerExp / PlayerMaxExp);
+        EPer = (expTmp / MaxexpTmp);
 
         HpBar.transform.localScale = new Vector3(Per, HpBar.transform.localScale.y, HpBar.transform.localScale.z);
         ExpBar.transform.localScale = new Vector3(EPer, ExpBar.transform.localScale.y, ExpBar.transform.localScale.z);

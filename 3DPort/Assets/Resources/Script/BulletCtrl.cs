@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class BulletCtrl : MonoBehaviour
 {
-    private float Speed;
     public float Power;
 
     void Start()
     {
-        Speed = 8.0f;
         GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
     }
 
