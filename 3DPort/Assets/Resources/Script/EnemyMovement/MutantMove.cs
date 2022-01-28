@@ -7,11 +7,11 @@ public class MutantMove : MonoBehaviour
     private float Hp;
     private float Power;
 
-    [SerializeField] private bool PlayerInRange;
-    private bool Atk;
-    private bool Move;
-    private bool Dead;
-    private bool GiveEp;
+    [SerializeField]private bool PlayerInRange;
+    [SerializeField]private bool Atk;
+    [SerializeField]private bool Move;
+    [SerializeField]private bool Dead;
+    [SerializeField]private bool GiveEp;
 
     private Animator Anime;
 
@@ -33,6 +33,7 @@ public class MutantMove : MonoBehaviour
         Atk = false;
         Move = false;
         GiveEp = false;
+        Dead = false;
 
         Anime = GetComponent<Animator>();
     }
@@ -40,7 +41,11 @@ public class MutantMove : MonoBehaviour
     void Update()
     {
         if (Hp <= 0)
+        {
+            Atk = false;
+            Move = false;
             Dead = true;
+        }
 
         if (!Move)
             Invoke("EnemySpawn", 4.15f);
@@ -73,6 +78,11 @@ public class MutantMove : MonoBehaviour
         }
 
         HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetHp = Hp;
+
+        if (!Anime.GetCurrentAnimatorStateInfo(0).IsName("Dead"))  //0 = base layer
+        {
+            Debug.Log("AnimationNotPlaying");
+        }
     }
 
     private void LateUpdate()
@@ -82,6 +92,7 @@ public class MutantMove : MonoBehaviour
 
         if (Dead)
         {
+            Anime.Play("Dead");
             if (!GiveEp)
             {
                 GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>().PlayerExp += 5;

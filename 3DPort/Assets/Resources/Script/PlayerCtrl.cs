@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCtrl : MonoBehaviour
 {
     [SerializeField]private float MoveSpeed;
-    private float Fire;
+    [SerializeField]private float Fire;
     private float FireSpeed;
     private float AtkDelay;
 
@@ -117,9 +117,16 @@ public class PlayerCtrl : MonoBehaviour
         if(Fire == 0.0f)
         {
             if (NomalF.isPlaying)
-                NomalF.Play(false);
+            {
+                NomalF.Stop();
+                NomalF.Clear();
+            }
+
             if (RSkillF.isPlaying)
-                RSkillF.Play(false);
+            {
+                RSkillF.Stop();
+                RSkillF.Clear();
+            }
         }
 
         if (Dash)
@@ -141,7 +148,6 @@ public class PlayerCtrl : MonoBehaviour
         Anime.SetFloat("Fire", Fire);
         Anime.SetBool("Jump", Jump);
         Anime.SetBool("Falling", Falling);
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -166,9 +172,9 @@ public class PlayerCtrl : MonoBehaviour
         yield return new WaitForSeconds(FireSpeed);
 
         if (Fire == 1.0f || Fire == 2.0f)
-            NomalF.Play(true);
+            NomalF.Play();
         else if (Fire == 3.0f)
-            RSkillF.Play(true);
+            RSkillF.Play();
 
         ShotBullet();
 
@@ -200,13 +206,12 @@ public class PlayerCtrl : MonoBehaviour
 
         BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
         
-
-        if (!GameObject.Find("CameraObj").GetComponent<CameraCtrl>().FindTarget)
-            BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
-        else
+        //if (!GameObject.Find("CameraObj").GetComponent<CameraCtrl>().FindTarget)
+        //    BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;
+        //else
             BObj.transform.LookAt(TargetPos);
 
-        if (Fire == 1.0f || Fire == 3.0f)
+        if (Fire == 1.0f)
             BObj.GetComponent<BulletCtrl>().Power = StatUi.PlayerPower;
         else if(Fire == 2.0f)
         {
@@ -217,6 +222,8 @@ public class PlayerCtrl : MonoBehaviour
             temp.transform.position = BObj.transform.position;
             temp.transform.rotation = BObj.transform.rotation;
         }
+        else if (Fire == 3.0f)
+            BObj.GetComponent<BulletCtrl>().Power = StatUi.PlayerPower / 2.0f;
 
         BObj.SetActive(true);
 
