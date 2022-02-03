@@ -11,9 +11,13 @@ public class PlayerCtrl : MonoBehaviour
 
     public float SkillPower;
 
+    private float Hor;
+    private float Ver;
+
     private bool Falling;
     private bool Jump;
     private bool Dash;
+    private bool Rolling;
     public bool Dead;
 
     private Vector3 LastPosition;
@@ -44,6 +48,7 @@ public class PlayerCtrl : MonoBehaviour
         Bullet = Resources.Load("Prefab/Bullet") as GameObject;
         MoveSpeed = 4.0f;
         Falling = false;
+        Rolling = false;
         Fire = 0.0f;
         FireSpeed = 0.1f;
         AtkDelay = 0.2f;
@@ -51,14 +56,14 @@ public class PlayerCtrl : MonoBehaviour
 
         StatUi = GameObject.Find("PlayerStat").GetComponent<PlayerStatUi>();
         Cool = GameObject.Find("SkillParent").GetComponent<SkillCoolDown>();
-        NomalF = transform.Find("Hips/ArmPosition_Right/Muzzle/Ef/NomalFire").GetComponent<ParticleSystem>();
-        RSkillF = transform.Find("Hips/ArmPosition_Right/Muzzle/Ef/RSkillFire").GetComponent<ParticleSystem>();
+        //NomalF = transform.Find("Hips/ArmPosition_Right/Muzzle/Ef/NomalFire").GetComponent<ParticleSystem>();
+        //RSkillF = transform.Find("Hips/ArmPosition_Right/Muzzle/Ef/RSkillFire").GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        var Hor = Input.GetAxis("Horizontal");
-        var Ver = Input.GetAxis("Vertical");
+        Hor = Input.GetAxis("Horizontal");
+        Ver = Input.GetAxis("Vertical");
 
         transform.Translate(Time.deltaTime * MoveSpeed * Hor, 0.0f, Time.deltaTime * MoveSpeed * Ver, Space.Self);
 
@@ -78,6 +83,14 @@ public class PlayerCtrl : MonoBehaviour
             Dash = true;
         }
 
+        if(Input.GetKeyDown(KeyCode.LeftShift) && Cool.CoolTime[1] == 0.0f)
+        {
+            Rolling = true;
+
+            Cool.CoolTime[1] = 4.0f;
+            Cool.CoolAct[1] = true;
+        }
+
         if (Input.GetMouseButtonDown(0) && Fire == 0.0f)
         {
             Fire = 1.0f;
@@ -88,14 +101,14 @@ public class PlayerCtrl : MonoBehaviour
             StartCoroutine("ShootBullet");
         }
 
-        if (Input.GetMouseButtonDown(1) && Fire == 0.0f)
+        if (Input.GetMouseButtonDown(1) && Fire == 0.0f && Cool.CoolTime[0] == 0.0f)
         {
-            Fire = 1.0f;
+            Fire = 2.0f;
             AtkDelay = 0.2f;
 
             ShotBullet();
-            Cool.CoolTime[1] = 3.0f;
-            Cool.CoolAct[1] = true;
+            Cool.CoolTime[0] = 3.0f;
+            Cool.CoolAct[0] = true;
         }
 
         if (Input.GetKeyDown(KeyCode.R) && Fire == 0 && Cool.CoolTime[2] == 0.0f)
@@ -114,26 +127,35 @@ public class PlayerCtrl : MonoBehaviour
             ShotBullet();
         }
         
-        if(Fire == 0.0f)
-        {
-            if (NomalF.isPlaying)
-            {
-                NomalF.Stop();
-                NomalF.Clear();
-            }
-
-            if (RSkillF.isPlaying)
-            {
-                RSkillF.Stop();
-                RSkillF.Clear();
-            }
-        }
+        //if(Fire == 0.0f)
+        //{
+        //    if (NomalF.isPlaying)
+        //    {
+        //        NomalF.Stop();
+        //        NomalF.Clear();
+        //    }
+        //
+        //    if (RSkillF.isPlaying)
+        //    {
+        //        RSkillF.Stop();
+        //        RSkillF.Clear();
+        //    }
+        //}
 
         if (Dash)
         {
             MoveSpeed = 4.0f * 2.0f;
+            Ver = 2.0f;
             if (Hor == 0 && Ver == 0 || Input.GetMouseButtonDown(0))
                 Dash = false;
+        }
+        else
+            MoveSpeed = 4.0f;
+
+        if (Rolling)
+        {
+            MoveSpeed = 100.0f;
+            Rolling = false;
         }
         else
             MoveSpeed = 4.0f;
@@ -143,11 +165,16 @@ public class PlayerCtrl : MonoBehaviour
             transform.position = LastPosition;
         }
 
+    }
+
+    private void LateUpdate()
+    {
         Anime.SetFloat("Hor", Hor);
         Anime.SetFloat("Ver", Ver);
         Anime.SetFloat("Fire", Fire);
         Anime.SetBool("Jump", Jump);
         Anime.SetBool("Falling", Falling);
+        Anime.SetBool("Rolling", Rolling);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -171,10 +198,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         yield return new WaitForSeconds(FireSpeed);
 
-        if (Fire == 1.0f || Fire == 2.0f)
-            NomalF.Play();
-        else if (Fire == 3.0f)
-            RSkillF.Play();
+        //if (Fire == 1.0f || Fire == 2.0f)
+        //    NomalF.Play();
+        //else if (Fire == 3.0f)
+        //    RSkillF.Play();
 
         ShotBullet();
 
@@ -204,7 +231,7 @@ public class PlayerCtrl : MonoBehaviour
 
         GameObject BObj = Singleton.GetInstance().GetDisableList.Pop();
 
-        BObj.transform.position = transform.Find("Hips/ArmPosition_Right/Muzzle").position;
+        BObj.transform.position = transform.Find("ModelBase/mdlCommandoDualies/CommandoArmature/MuzzleCenter").position;
         
         //if (!GameObject.Find("CameraObj").GetComponent<CameraCtrl>().FindTarget)
         //    BObj.transform.rotation = GameObject.Find("CameraObj").transform.rotation;

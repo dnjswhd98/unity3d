@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Player = Resources.Load("Prefab/Player") as GameObject;
+        Player = Resources.Load("Prefab/PlayerComanndo") as GameObject;
         EnemySpawnPercentage = 0.25f;
         EnemyFlying = 1.0f;
         EnemySpawnParent = new GameObject("ESpawnParent");
