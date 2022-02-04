@@ -14,7 +14,7 @@ public class SpawnEnemy : MonoBehaviour
     private void Awake()
     {
         Fly = false;
-        Enemy = Resources.Load("Prefab/Mutant") as GameObject;
+        Enemy = Resources.Load("Prefab/Lemurian") as GameObject;
         FEnemy = Resources.Load("Prefab/FlyingEnemy1") as GameObject;
     }
 
