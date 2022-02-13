@@ -144,7 +144,7 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Dash)
         {
-            MoveSpeed = 4.0f * 2.0f;
+            MoveSpeed = 4.0f * 3.0f;
             Ver = 2.0f;
             if (Hor == 0 && Ver == 0 || Input.GetMouseButtonDown(0))
                 Dash = false;
@@ -154,7 +154,7 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Rolling)
         {
-            MoveSpeed = 100.0f;
+            MoveSpeed = 1000.0f;
             Rolling = false;
         }
         else

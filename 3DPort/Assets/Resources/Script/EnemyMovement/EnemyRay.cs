@@ -55,7 +55,7 @@ public class EnemyRay : MonoBehaviour
                             else
                                 FindTarget = false;
 
-                            if (TargetDistance <= 2.0f)
+                            if (TargetDistance <= 1.0f)
                                 AttackRange = true;
                             else
                                 AttackRange = false;

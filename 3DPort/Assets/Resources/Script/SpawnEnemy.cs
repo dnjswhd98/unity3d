@@ -22,12 +22,12 @@ public class SpawnEnemy : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player");
         if(!Fly)
-            transform.position = new Vector3(Random.Range(Player.transform.position.x - 500.0f, Player.transform.position.x + 500.0f), 
+            transform.position = new Vector3(Random.Range(Player.transform.position.x - 100.0f, Player.transform.position.x + 100.0f), 
                 Player.transform.position.y + 100.0f, Random.Range(Player.transform.position.z - 100.0f, Player.transform.position.z + 100.0f));
         else
             transform.position = new Vector3(Random.Range(Player.transform.position.x - 500.0f, Player.transform.position.x + 500.0f),
-                Random.Range(Player.transform.position.y + 100.0f, Player.transform.position.y + 300.0f),
-                Random.Range(Player.transform.position.z - 500.0f, Player.transform.position.z + 500.0f));
+                Random.Range(Player.transform.position.y + 50.0f, Player.transform.position.y + 100.0f),
+                Random.Range(Player.transform.position.z - 200.0f, Player.transform.position.z + 200.0f));
     }
 
     private void Update()
@@ -75,7 +75,7 @@ public class SpawnEnemy : MonoBehaviour
                 else
                 {
                     Enemy = Singleton.GetInstance().GetDisableEnemyList.Pop();
-                    Enemy = Resources.Load("Prefab/RobEnemy") as GameObject;
+                    Enemy = Resources.Load("Prefab/Lemurian") as GameObject;
                     Enemy.transform.position = transform.position;
                     Instantiate(Enemy);
                     Singleton.GetInstance().GetEnableList.Add(Enemy);

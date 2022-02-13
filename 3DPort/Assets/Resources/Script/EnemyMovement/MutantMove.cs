@@ -76,13 +76,15 @@ public class MutantMove : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (!Anime.GetCurrentAnimatorStateInfo(0).IsName("Dead"))  //0 = base layer
+            {
+                Debug.Log("AnimationNotPlaying");
+            }
+        }
 
         HpBar.transform.Find("Bg").GetComponent<EnemyHpBar>().TargetHp = Hp;
-
-        if (!Anime.GetCurrentAnimatorStateInfo(0).IsName("Dead"))  //0 = base layer
-        {
-            Debug.Log("AnimationNotPlaying");
-        }
     }
 
     private void LateUpdate()
@@ -110,9 +112,9 @@ public class MutantMove : MonoBehaviour
         }
 
         Anime.SetBool("Move", Move);
-        Anime.SetBool("Attack", Atk);
+        Anime.SetBool("Atk", Atk);
         Anime.SetBool("Dead", Dead);
-        Anime.SetBool("FindPlayer", PlayerInRange);
+        //Anime.SetBool("FindPlayer", PlayerInRange);
     }
 
     private void OnCollisionEnter(Collision collision)
