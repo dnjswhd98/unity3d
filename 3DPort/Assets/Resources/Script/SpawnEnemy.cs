@@ -25,7 +25,7 @@ public class SpawnEnemy : MonoBehaviour
             transform.position = new Vector3(Random.Range(Player.transform.position.x - 100.0f, Player.transform.position.x + 100.0f), 
                 Player.transform.position.y + 100.0f, Random.Range(Player.transform.position.z - 100.0f, Player.transform.position.z + 100.0f));
         else
-            transform.position = new Vector3(Random.Range(Player.transform.position.x - 500.0f, Player.transform.position.x + 500.0f),
+            transform.position = new Vector3(Random.Range(Player.transform.position.x - 200.0f, Player.transform.position.x + 200.0f),
                 Random.Range(Player.transform.position.y + 50.0f, Player.transform.position.y + 100.0f),
                 Random.Range(Player.transform.position.z - 200.0f, Player.transform.position.z + 200.0f));
     }

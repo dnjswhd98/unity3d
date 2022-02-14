@@ -47,8 +47,7 @@ public class MutantMove : MonoBehaviour
             Dead = true;
         }
 
-        if (!Move)
-            Invoke("EnemySpawn", 4.15f);
+        
 
         if (GetComponent<EnemyRay>().FindTarget)
             PlayerInRange = true;
@@ -75,6 +74,8 @@ public class MutantMove : MonoBehaviour
                         Atk = true;
                 }
             }
+            else
+                Invoke("EnemySpawn", 4.15f);
         }
         else
         {

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     {
         Player = Resources.Load("Prefab/PlayerComanndo") as GameObject;
         EnemySpawnPercentage = 0.25f;
-        EnemyFlying = 1.0f;
+        EnemyFlying = 0.6f;
         EnemySpawnParent = new GameObject("ESpawnParent");
         EnemySpawnParent.transform.parent = GameObject.Find("Spawns").transform;
         BulletParent = new GameObject("BulletParent");
@@ -33,10 +33,10 @@ public class GameManager : MonoBehaviour
             EnemySpawnPoint[i].AddComponent<SpawnEnemy>();
             EnemySpawnPoint[i].SetActive(false);
         
-            //FlyingEnemySpawnPoint[i] = new GameObject("FESpawnPoint" + i);
-            //FlyingEnemySpawnPoint[i].transform.parent = EnemySpawnParent.transform;
-            //FlyingEnemySpawnPoint[i].AddComponent<SpawnEnemy>();
-            //FlyingEnemySpawnPoint[i].SetActive(false);
+            FlyingEnemySpawnPoint[i] = new GameObject("FESpawnPoint" + i);
+            FlyingEnemySpawnPoint[i].transform.parent = EnemySpawnParent.transform;
+            FlyingEnemySpawnPoint[i].AddComponent<SpawnEnemy>();
+            FlyingEnemySpawnPoint[i].SetActive(false);
         }
     }
 
@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour
             {
                 if (Random.Range(0.0f, 2.0f) < EnemyFlying)
                 {
-                    //if (!FlyingEnemySpawnPoint[i].activeSelf)
-                    //{
-                    //    FlyingEnemySpawnPoint[i].SetActive(true);s
-                    //    FlyingEnemySpawnPoint[i].GetComponent<SpawnEnemy>().Fly = true;
-                    //}
+                    if (!FlyingEnemySpawnPoint[i].activeSelf)
+                    {
+                        FlyingEnemySpawnPoint[i].SetActive(true);
+                        FlyingEnemySpawnPoint[i].GetComponent<SpawnEnemy>().Fly = true;
+                    }
                 }
                 else
                 {

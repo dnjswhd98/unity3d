@@ -78,9 +78,12 @@ public class PlayerCtrl : MonoBehaviour
             Jump = true;
         }
 
-        if(Input.GetKey(KeyCode.LeftControl))
+        if (Hor > 0 || Ver > 0)
         {
-            Dash = true;
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                Dash = true;
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && Cool.CoolTime[1] == 0.0f)
@@ -146,7 +149,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             MoveSpeed = 4.0f * 3.0f;
             Ver = 2.0f;
-            if (Hor == 0 && Ver == 0 || Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
                 Dash = false;
         }
         else
